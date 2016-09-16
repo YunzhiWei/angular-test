@@ -10,11 +10,26 @@ function LunchCheckController($scope) {
   $scope.evaluateresult = "";
 
   $scope.evaluateLunchMenu = function () {
-    if ( $scope.lunchmenu == "" ) {
+    var str = $scope.lunchmenu
+
+    if ( str == "" ) {
       $scope.evaluateresult = "Please enter data first";
       return;
     }
-    if (3 < howManyItemsInMenu($scope.lunchmenu)) {
+
+    var c = str.slice(-1);
+    while(c == ',' || c == ' ') {
+      console.log(c);
+      console.log(str)
+      str = str.slice(0, -1);
+      c = str.slice(-1);
+    }
+
+    if ( str == "" ) {
+      $scope.evaluateresult = "Please enter data first";
+      return;
+    }
+    if (3 < howManyItemsInMenu(str)) {
       $scope.evaluateresult = "Too much!";
     }
     else {
