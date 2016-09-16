@@ -6,16 +6,22 @@ angular.module('LunchCheck', [])
 
 LunchCheckController.$inject = ['$scope'];
 function LunchCheckController($scope) {
-  $scope.name = "Yaakov";
-  $scope.stateOfBeing = "hungry";
+  $scope.lunchmenu = "list comma separated dishes you usually have for lunch";
+  $scope.evaluateresult = "evaluate result";
 
-  $scope.sayMessage = function () {
-    return "Yaakov likes to eat healthy snacks at night!";
+  $scope.evaluateLunchMenu = function () {
+    if (3 < howManyItemsInMenu($scope.lunchmenu)) {
+      $scope.evaluateresult = "too much!";
+    }
+    else {
+      $scope.evaluateresult = "enjoy!";
+    }
   };
 
-  $scope.feedYaakov = function () {
-    $scope.stateOfBeing = "fed";
-  };
+  function howManyItemsInMenu(lunchmenu) {
+    console.log(lunchmenu);
+    return 3;
+  }
 }
 
 })();
