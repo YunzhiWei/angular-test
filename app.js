@@ -6,21 +6,25 @@ angular.module('LunchCheck', [])
 
 LunchCheckController.$inject = ['$scope'];
 function LunchCheckController($scope) {
-  $scope.lunchmenu = "list comma separated dishes you usually have for lunch";
-  $scope.evaluateresult = "evaluate result";
+  $scope.lunchmenu = "";
+  $scope.evaluateresult = "";
 
   $scope.evaluateLunchMenu = function () {
+    if ( $scope.lunchmenu == "" ) {
+      $scope.evaluateresult = "Please enter data first";
+      return;
+    }
     if (3 < howManyItemsInMenu($scope.lunchmenu)) {
-      $scope.evaluateresult = "too much!";
+      $scope.evaluateresult = "Too much!";
     }
     else {
-      $scope.evaluateresult = "enjoy!";
+      $scope.evaluateresult = "Enjoy!";
     }
   };
 
   function howManyItemsInMenu(lunchmenu) {
     console.log(lunchmenu);
-    return 3;
+    return lunchmenu.split(',').length;
   }
 }
 
