@@ -11,6 +11,7 @@ function ToBuyShoppingController(ShoppingListCheckOffService) {
   var tobuyctrl = this;
 
   tobuyctrl.items = ShoppingListCheckOffService.getToBuyItems();
+  tobuyctrl.isListEmpty = ShoppingListCheckOffService.isToBuyListEmpty();
 
   tobuyctrl.pickupItem = function (index) {
     ShoppingListCheckOffService.PickUpItem(index);
@@ -22,6 +23,7 @@ function AlreadyBoughtShoppingController(ShoppingListCheckOffService) {
   var boughtctrl = this;
 
   boughtctrl.items = ShoppingListCheckOffService.getBoughtItems();
+  boughtctrl.isListEmpty = ShoppingListCheckOffService.isBoughtListEmpty();
 }
 
 
@@ -56,18 +58,28 @@ function ShoppingListCheckOffService() {
   ];
 
   var boughtitems = [
-    {
-      name: "icecream",
-      quantity: "7"
-    }
+    // {
+    //   name: "icecream",
+    //   quantity: "7"
+    // }
   ];
 
   service.getToBuyItems = function () {
     return tobuyitems;
   }
 
+  service.isToBuyListEmpty = function () {
+    console.log("to buy length", tobuyitems.length);
+    return (tobuyitems.length == 0);
+  }
+
   service.getBoughtItems = function () {
     return boughtitems;
+  }
+
+  service.isBoughtListEmpty = function () {
+    console.log("bought length", boughtitems.length);
+    return (boughtitems.length == 0);
   }
 
   service.PickUpItem = function (index) {
