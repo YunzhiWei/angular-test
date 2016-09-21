@@ -1,45 +1,79 @@
 (function () {
 'use strict';
 
-angular.module('LunchCheck', [])
-.controller('LunchCheckController', LunchCheckController);
+angular.module('ShoppingListCheckOff', [])
+.controller('LunchCheckController', ToBuyShoppingController)
+.controller('LunchCheckController', AlreadyBoughtShoppingController)
+.service('ShoppingListCheckOffService', ShoppingListCheckOffService);
 
-LunchCheckController.$inject = ['$scope'];
-function LunchCheckController($scope) {
-  $scope.lunchmenu = "";
-  $scope.evaluateresult = "";
+ToBuyShoppingController.$inject = ['ShoppingListCheckOffService'];
+function ToBuyShoppingController(ShoppingListCheckOffService) {
+  var tobuyctrl = this;
 
-  $scope.evaluateLunchMenu = function () {
-    var str = $scope.lunchmenu
+  tobuyctrl.items = ShoppingListCheckOffService.getToBuyItems();
+  
+  tobuyctrl.pickupItem = function (index) {
+    ShoppingListCheckOffService.PickUpItem(index);
+  }
+}
 
-    if ( str == "" ) {
-      $scope.evaluateresult = "Please enter data first";
-      return;
+AlreadyBoughtShoppingController.$inject = ['ShoppingListCheckOffService'];
+function AlreadyBoughtShoppingController(ShoppingListCheckOffService) {
+  var boughtctrl = this;
+
+  boughtctrl.items = ShoppingListCheckOffService.getBoughtItems();
+}
+
+
+function ShoppingListCheckOffService() {
+  var service = this;
+
+  var tobuyitems  = [
+    {
+      name: "Apple",
+      quantity: "2"
+    },
+    {
+      name: "Banana",
+      quantity: "7"
+    },
+    {
+      name: "Cherry",
+      quantity: "5"
+    },
+    {
+      name: "Donut",
+      quantity: "6"
+    },
+    {
+      name: "Egg",
+      quantity: "4"
+    },
+    {
+      name: "Fish",
+      quantity: "7"
     }
+  ];
 
-    var c = str.slice(-1);
-    while(c == ',' || c == ' ') {
-      console.log(c);
-      console.log(str)
-      str = str.slice(0, -1);
-      c = str.slice(-1);
+  var boughtitems = [
+    {
+      name: "icecream",
+      quantity: "7"
     }
+  ];
 
-    if ( str == "" ) {
-      $scope.evaluateresult = "Please enter data first";
-      return;
-    }
-    if (3 < howManyItemsInMenu(str)) {
-      $scope.evaluateresult = "Too much!";
-    }
-    else {
-      $scope.evaluateresult = "Enjoy!";
-    }
-  };
+  service.getToBuyItems = function () {
+    return tobuyitems;
+  }
 
-  function howManyItemsInMenu(lunchmenu) {
-    console.log(lunchmenu);
-    return lunchmenu.split(',').length;
+  service.getBoughtItems = function () {
+    return boughtitems;
+  }
+
+  service.PickUpItem = function (index) {
+    boughtitems.push(boughtitems[index]);
+
+    tobuyitems.splice(index, 1);
   }
 }
 
