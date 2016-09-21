@@ -32,23 +32,23 @@ function ShoppingListCheckOffService() {
 
   var tobuyitems  = [
     {
-      name: "Apple",
+      name: "Apples",
       quantity: "2"
     },
     {
-      name: "Banana",
+      name: "Bananas",
       quantity: "7"
     },
     {
-      name: "Cherry",
+      name: "Cherries",
       quantity: "5"
     },
     {
-      name: "Donut",
+      name: "Donuts",
       quantity: "6"
     },
     {
-      name: "Egg",
+      name: "Eggs",
       quantity: "4"
     },
     {

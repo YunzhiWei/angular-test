@@ -34,7 +34,7 @@
          <ul>
            <!-- <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li> -->
            <li ng-repeat="item in tobuyctrl.items">
-             Buy {{ item.quantity }} of {{ item.name }}
+             Buy {{ item.quantity }} {{ item.name }}
              <button class="btn btn-default" ng-click="tobuyctrl.pickupItem($index);"><span class="glyphicon glyphicon-ok"></span> Bought</button>
            </li>
          </ul>
@@ -47,7 +47,7 @@
           <ul>
             <!-- <li>Bought 10 cookies</li> -->
             <li ng-repeat="item in boughtctrl.items">
-              Bought {{ item.quantity }} of {{ item.name }}
+              Bought {{ item.quantity }} {{ item.name }}
             </li>
           </ul>
           <div ng-if="boughtctrl.items.length==0" class="emptyMessage">Nothing bought yet.
