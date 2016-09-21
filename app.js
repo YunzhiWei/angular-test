@@ -2,8 +2,8 @@
 'use strict';
 
 angular.module('ShoppingListCheckOff', [])
-.controller('LunchCheckController', ToBuyShoppingController)
-.controller('LunchCheckController', AlreadyBoughtShoppingController)
+.controller('ToBuyShoppingController', ToBuyShoppingController)
+.controller('AlreadyBoughtShoppingController', AlreadyBoughtShoppingController)
 .service('ShoppingListCheckOffService', ShoppingListCheckOffService);
 
 ToBuyShoppingController.$inject = ['ShoppingListCheckOffService'];
@@ -11,7 +11,7 @@ function ToBuyShoppingController(ShoppingListCheckOffService) {
   var tobuyctrl = this;
 
   tobuyctrl.items = ShoppingListCheckOffService.getToBuyItems();
-  
+
   tobuyctrl.pickupItem = function (index) {
     ShoppingListCheckOffService.PickUpItem(index);
   }
@@ -71,7 +71,7 @@ function ShoppingListCheckOffService() {
   }
 
   service.PickUpItem = function (index) {
-    boughtitems.push(boughtitems[index]);
+    boughtitems.push(tobuyitems[index]);
 
     tobuyitems.splice(index, 1);
   }

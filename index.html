@@ -29,23 +29,23 @@
       <div class="row">
 
         <!-- To Buy List -->
-        <div class="col-md-6" ng-controller='ToBuyShoppingController'>
+        <div class="col-md-6" ng-controller='ToBuyShoppingController as tobuyctrl'>
          <h2>To Buy:</h2>
          <ul>
-           <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
-               <li ng-repeat="item in tobuyctrl.items">
+           <!-- <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li> -->
+           <li ng-repeat="item in tobuyctrl.items">
              Buy {{ item.quantity }} of {{ item.name }}
              <button class="btn btn-default" ng-click="tobuyctrl.pickupItem($index);"><span class="glyphicon glyphicon-ok"></span> Bought</button>
-          </li>
+           </li>
          </ul>
          <div class="emptyMessage">Everything is bought!</div>
         </div>
 
         <!-- Already Bought List -->
-        <div class="col-md-6" ng-controller='AlreadyBoughtShoppingController'>
+        <div class="col-md-6" ng-controller='AlreadyBoughtShoppingController as boughtctrl'>
           <h2>Already Bought:</h2>
           <ul>
-            <li>Bought 10 cookies</li>
+            <!-- <li>Bought 10 cookies</li> -->
             <li ng-repeat="item in boughtctrl.items">
               Bought {{ item.quantity }} of {{ item.name }}
             </li>
