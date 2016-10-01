@@ -16,6 +16,7 @@ function NarrowItDownController (MenuSearchService) {
 
   narrowctrl.showMatchedMenuItems = function () {
     console.log(narrowctrl.searchTerm);
+    MenuSearchService.getMatchedMenuItems(narrowctrl.searchTerm);
   }
 
   // var promise = MenuSearchService.getMatchedMenuItems();
@@ -35,21 +36,13 @@ function MenuSearchService($http, ApiBasePath) {
   var service = this;
 
   var founditems = [
-    {
-      id: 877,
-      short_name: "A1",
-      name: "Won Ton Soup with Chicken",
-      description: "chicken-stuffed won ton",
-      price_small: 2.55,
-      price_large: 5
-    }
   ];
 
   service.getItems = function () {
     return founditems;
   };
-  //
-  // service.getMatchedMenuItems = function (searchTerm) {
+
+  service.getMatchedMenuItems = function (searchTerm) {
   //   return $http({
   //     method: "GET",
   //     url: (ApiBasePath + "/menu_items.json")
@@ -57,7 +50,18 @@ function MenuSearchService($http, ApiBasePath) {
   //     var founditems = result.data;
   //     return founditems;
   //   });
-  // }
+
+    var item = {
+        id: 877,
+        short_name: "A1",
+        name: "Won Ton Soup with Chicken",
+        description: "chicken-stuffed won ton",
+        price_small: 2.55,
+        price_large: 5
+    };
+    item.name = searchTerm;
+    founditems.push(item);
+  }
 }
 
 })();
