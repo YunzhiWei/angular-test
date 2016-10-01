@@ -9,26 +9,32 @@ angular.module('NarrowItDownApp', [])
 NarrowItDownController.$inject = ['MenuSearchService'];
 function NarrowItDownController (MenuSearchService) {
   var narrowctrl = this;
+  var found = [];
 
-  narrowctrl.items = MenuSearchService.getItems();
+  narrowctrl.items = found; // MenuSearchService.getItems();
 
   narrowctrl.searchTerm = "";
 
   narrowctrl.showMatchedMenuItems = function () {
+    console.log("Constoller begin!");
     console.log(narrowctrl.searchTerm);
-    MenuSearchService.getMatchedMenuItems(narrowctrl.searchTerm);
-  }
 
-  // var promise = MenuSearchService.getMatchedMenuItems();
-  //
-  // promise.then(function (response) {
-  //   narrowctrl.found = response.data;
-  // })
-  // .catch(funtion (error) {
-  //   console.log("Something went terribly wrong!");
-  // });
+    var promise = MenuSearchService.getMatchedMenuItems(narrowctrl.searchTerm);
 
-  // narrowctrl.found = MenuSearchService.getMatchedMenuItems();
+    found.splice(0, found.length);
+
+    promise.then(function (response) {
+      console.log("Controller Response from service!")
+      console.log(response);
+
+      for (var i = 0; i < response.length; i++) {
+        found.push(response[i]);
+      }
+    })
+    .catch(function (error) {
+      console.log("Something went terribly wrong!");
+    })
+  };
 }
 
 MenuSearchService.$inject = ['$http', 'ApiBasePath']
@@ -43,17 +49,19 @@ function MenuSearchService($http, ApiBasePath) {
   };
 
   service.getMatchedMenuItems = function (searchTerm) {
+    console.log("Service Begin!");
     return $http({
       method: "GET",
       url: (ApiBasePath + "/menu_items.json")
     }).then(function (result) {
       founditems.splice(0, founditems.length);
 
+      console.log("Service result!")
       console.log(result);
-      console.log(result.data.menu_items);
+      // console.log(result.data.menu_items);
 
       for (var i = 0; i < result.data.menu_items.length; i++) {
-        console.log(result.data.menu_items[i]);
+        // console.log(result.data.menu_items[i]);
         if(
           (searchTerm == "") ||
           (result.data.menu_items[i].name.indexOf(searchTerm) >= 0)
@@ -61,6 +69,8 @@ function MenuSearchService($http, ApiBasePath) {
           founditems.push(result.data.menu_items[i]);
         }
       }
+
+      return founditems;
     });
   }
 }
