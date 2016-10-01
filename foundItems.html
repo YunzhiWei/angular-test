@@ -1,14 +1,9 @@
-<div class="clearBoth">
-  <ul>
-    <li ng-repeat="item in menu.found">
-      <ul>
-         <li><b>Name:</b>{{ item.name }} </li>
-         <li><b>ShortName:</b>{{ item.short_name }} </li>
-         <li><b>Description:</b>{{ item.description }} </li>
-         <li><button ng-click="menu.onRemove({index: $index});">Don't want this one!</button></li>
-      </ul>
-
-    </li>
-  </ul>
-</div>
-<div class="error" ng-if="menu.found.length == 0">Nothing found!</div>
+<ol>
+  <li ng-repeat="item in narrowctrl.items">
+    short name: {{item.short_name}} <br>
+    name: {{item.name}} <br>
+    description: {{item.description}} <br>
+    <button ng-click="narrowctrl.removeItem($index)">Don't want this one!</button> <br> <br>
+  </li>
+</ol>
+<div ng-if="narrowctrl.searchResult" class="error">{{narrowctrl.searchResult}}</div>
