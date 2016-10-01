@@ -1,7 +1,8 @@
 <ol>
   <li ng-repeat="item in narrowctrl.items">
-    [{{item.short_name}}] - {{item.name}} <br>
-    {{item.description}} <br>
+    short name: {{item.short_name}} <br>
+    name: {{item.name}} <br>
+    description: {{item.description}} <br>
     <button ng-click="narrowctrl.removeItem($index)">Don't want this one!</button> <br> <br>
   </li>
 </ol>
