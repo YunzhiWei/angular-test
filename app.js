@@ -43,24 +43,25 @@ function MenuSearchService($http, ApiBasePath) {
   };
 
   service.getMatchedMenuItems = function (searchTerm) {
-  //   return $http({
-  //     method: "GET",
-  //     url: (ApiBasePath + "/menu_items.json")
-  //   }).then(function (result) {
-  //     var founditems = result.data;
-  //     return founditems;
-  //   });
+    return $http({
+      method: "GET",
+      url: (ApiBasePath + "/menu_items.json")
+    }).then(function (result) {
+      founditems.splice(0, founditems.length);
 
-    var item = {
-        id: 877,
-        short_name: "A1",
-        name: "Won Ton Soup with Chicken",
-        description: "chicken-stuffed won ton",
-        price_small: 2.55,
-        price_large: 5
-    };
-    item.name = searchTerm;
-    founditems.push(item);
+      console.log(result);
+      console.log(result.data.menu_items);
+
+      for (var i = 0; i < result.data.menu_items.length; i++) {
+        console.log(result.data.menu_items[i]);
+        if(
+          (searchTerm == "") ||
+          (result.data.menu_items[i].name.indexOf(searchTerm) >= 0)
+          ) {
+          founditems.push(result.data.menu_items[i]);
+        }
+      }
+    });
   }
 }
 
