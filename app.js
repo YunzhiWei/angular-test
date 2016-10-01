@@ -45,9 +45,14 @@ function NarrowItDownController (MenuSearchService) {
     console.log("Constoller begin!");
     console.log(narrowctrl.searchTerm);
 
-    var promise = MenuSearchService.getMatchedMenuItems(narrowctrl.searchTerm);
-
     found.splice(0, found.length);
+
+    if(narrowctrl.searchTerm == "") {
+      narrowctrl.searchResult = "Nothing found";
+      return;
+    }
+
+    var promise = MenuSearchService.getMatchedMenuItems(narrowctrl.searchTerm);
 
     promise.then(function (response) {
       console.log("Controller Response from service!")
