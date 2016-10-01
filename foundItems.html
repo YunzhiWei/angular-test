@@ -1,5 +1,7 @@
 <ol>
   <li ng-repeat="item in narrowctrl.items">
-    {{item.short_name}} {{item.name}}
+    [{{item.short_name}}] - {{item.name}} <br>
+    {{item.description}} <br>
+    <button>Remove</button> <br> <br>
   </li>
 </ol>

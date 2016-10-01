@@ -73,7 +73,7 @@ function MenuSearchService($http, ApiBasePath) {
         // console.log(result.data.menu_items[i]);
         if(
           (searchTerm == "") ||
-          (result.data.menu_items[i].name.indexOf(searchTerm) >= 0)
+          (result.data.menu_items[i].description.indexOf(searchTerm) >= 0)
           ) {
           founditems.push(result.data.menu_items[i]);
         }
