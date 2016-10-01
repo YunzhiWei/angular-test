@@ -1,9 +1,19 @@
-<ol>
-  <li ng-repeat="item in narrowctrl.items">
-    short name: {{item.short_name}} <br>
-    name: {{item.name}} <br>
-    description: {{item.description}} <br>
-    <button ng-click="narrowctrl.removeItem($index)">Don't want this one!</button> <br> <br>
-  </li>
-</ol>
-<div ng-if="narrowctrl.searchResult" class="error">{{narrowctrl.searchResult}}</div>
+<div class="menu-item-tile" ng-repeat="item in items">
+  <div class="row">
+      <div class="menu-item-price">
+          <p><strong>{{item.short_name}}</strong>
+          {{item.price_small}} <span> {{item.small_portion_name}}</span>
+          {{item.price_large}} <span>{{item.large_portion_name}}</span>
+          </p>
+      </div>
+    <div class="menu-item-description">
+      <h3 class="menu-item-title">{{item.name}}
+          <button class="btn btn-warning btn-sm" ng-click="onRemove({index: $index});">Don't want this one!</button>
+      </h3>
+      <p class="menu-item-details">{{item.description}}</p>
+    </div>
+  </div>
+  <hr>
+</div>
+<br>
+<h2 ng-if="items.length == 0">Nothing found</h2>
