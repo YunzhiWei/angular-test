@@ -1,19 +1,30 @@
-<div class="menu-item-tile" ng-repeat="item in items">
-  <div class="row">
-      <div class="menu-item-price">
-          <p><strong>{{item.short_name}}</strong>
-          {{item.price_small}} <span> {{item.small_portion_name}}</span>
-          {{item.price_large}} <span>{{item.large_portion_name}}</span>
-          </p>
-      </div>
-    <div class="menu-item-description">
-      <h3 class="menu-item-title">{{item.name}}
-          <button class="btn btn-warning btn-sm" ng-click="onRemove({index: $index});">Don't want this one!</button>
-      </h3>
-      <p class="menu-item-details">{{item.description}}</p>
-    </div>
-  </div>
-  <hr>
+
+<h3>{{ vm.title }}</h3>
+<div class="alert alert-warning" role="alert" ng-if="vm.noItemsFound()">
+  <strong>Nothing found!</strong>
 </div>
-<br>
-<h2 ng-if="items.length == 0">Nothing found</h2>
+<table class="table table-striped">
+  <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Short Name</th>
+        <th>Description</th>
+        <th>Price Small</th>
+        <th>Large Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-if="vm.listEmpty()">
+        <td colspan="5">No items avaiable for table.</td>
+      </tr>
+      <tr ng-repeat="item in vm.items">
+        <td><button class="btn btn-primary btn-sm" ng-click="vm.onRemove({index: $index});">Don't want this one!</button></td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.short_name }}</td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.price_small | currency : "$" }}</td>
+        <td>{{ item.price_large | currency : "$" }}</td>
+      </tr>
+    </tbody>
+</table>
