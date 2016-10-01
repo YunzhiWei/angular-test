@@ -9,7 +9,13 @@ angular.module('NarrowItDownApp', [])
 
 function FoundItems() {
   var ddo = {
-    templateUrl: 'foundItems.html'
+    templateUrl: 'foundItems.html',
+    // scope: {
+    //  narrowctrl: '='
+    //    title: '@title',
+    // //   onRemove: '&'
+    // //   foundItems: '<'
+    //}
   };
 
   return ddo;
@@ -23,6 +29,17 @@ function NarrowItDownController (MenuSearchService) {
   narrowctrl.items = found; // MenuSearchService.getItems();
 
   narrowctrl.searchTerm = "";
+  narrowctrl.searchResult = "";
+
+  narrowctrl.removeItem = function (itemIndex) {
+    console.log("Remove ", itemIndex);
+
+    found.splice(itemIndex, 1);
+
+    if(found.length == 0) {
+      narrowctrl.searchResult = "Nothing found";
+    }
+  }
 
   narrowctrl.showMatchedMenuItems = function () {
     console.log("Constoller begin!");
@@ -38,6 +55,12 @@ function NarrowItDownController (MenuSearchService) {
 
       for (var i = 0; i < response.length; i++) {
         found.push(response[i]);
+      }
+      if(found.length == 0) {
+        narrowctrl.searchResult = "Nothing found";
+      }
+      else {
+        narrowctrl.searchResult = "";
       }
     })
     .catch(function (error) {

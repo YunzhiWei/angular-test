@@ -2,6 +2,7 @@
   <li ng-repeat="item in narrowctrl.items">
     [{{item.short_name}}] - {{item.name}} <br>
     {{item.description}} <br>
-    <button>Don't want this one!</button> <br> <br>
+    <button ng-click="narrowctrl.removeItem($index)">Don't want this one!</button> <br> <br>
   </li>
 </ol>
+<div ng-if="narrowctrl.searchResult" class="error">{{narrowctrl.searchResult}}</div>
