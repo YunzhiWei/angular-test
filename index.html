@@ -1,36 +1,31 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html ng-app='MenuApp'>
   <head>
-    <title>Narrow Down Your Menu Choice</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/styles.css">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>No Cookie Shopping List</title>
   </head>
-<body ng-app="NarrowItDownApp">
-   <div class="container" ng-controller="NarrowItDownController as vm">
-    <h1>Narrow Down Your Chinese Menu Choice</h1>
+  <body>
+    <h1>Welcome to our Restaurant</h1>
 
-    <div class="form-group">
-      <input type="text" placeholder="search term" class="form-control" ng-model="vm.searchTerm">
-    </div>
+    <ui-view></ui-view>
 
-    <div class="form-group narrow-button">
-      <button class="btn btn-primary" ng-click="vm.search();">Narrow It Down For Me!</button>
-    </div>
+    <!-- Libraries -->
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-ui-router.min.js"></script>
 
-    <!-- Bonus loader (see Bonus section of the assignment) -->
-    <!--<items-loader-indicator></items-loader-indicator>-->
+    <!-- Modules -->
+    <script src="src/data.module.js"></script>
+    <script src="src/menuapp.module.js"></script>
 
-    <br><br>
+    <!-- Routes -->
+    <script src="src/routes.js"></script>
 
-    <!-- found-items should be implemented as a component -->
-    <found-items
-      items="vm.found"
-      title="{{ vm.title }}"
-      on-remove="vm.removeItem(index);">
-    </found-items>
-  </div>
-  <script src="angular.min.js"></script>
-  <script src="app.js"></script>
-</body>
+    <!-- 'ShoppingList' module artifacts -->
+    <script src="src/menudata.service.js"></script>
+    <script src="src/categories.component.js"></script>
+    <script src="src/categories.controller.js"></script>
+    <script src="src/items.controller.js"></script>
+
+  </body>
 </html>
